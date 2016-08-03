@@ -1,0 +1,196 @@
+<input>
+# Number of models for which details are described in this input file
+
+<modelnumber> 1 </modelnumber>
+
+# Restart from previous (pickled) population?
+
+<restart> False </restart>
+
+#Series of epsilons. (Comma-delimited list)
+#If the length of the epsilon series is one and you have only one model
+#you are effectively doing abc Rejection
+
+# Automatic epsilon schedule. Provide a vector of final epsilons and the alpha (defaults to 0.9)
+<autoepsilon>
+<finalepsilon> 1 </finalepsilon>
+<alpha> 0.9 </alpha>
+</autoepsilon>
+
+# Particles
+<particles> 500 </particles>
+
+# Beta is the number of times to simulate each sampled parameter set.
+# This is only ﬁapplicable for models simulated using SDE.
+
+<beta> 1 </beta>
+
+# Internal timestep for solver.
+# Make this small for a stiff model.
+
+<dt> 1 </dt>
+
+# rtol and atol can be specified here.
+# If the model is stiff then setting these to small
+# might help the simulation to run.
+# Only applicable for models simulated using ODE.
+
+<rtol> 1e-6 </rtol>
+<atol> 1e-6 </atol>
+
+#User-supplied data.
+
+<data>
+# times: For abc-SMC, times must be a whitespace delimited list starting with 0.
+# For simulation only the first and last timepoints are used.
+# To make a synthetic data set give a whitespace delimited list of timepoints at which data points are required.
+
+<times> 0 0.5 1 2 4 8 </times>
+
+# variables: For abc-SMC, whitespace delimited lists of concentrations (ODE or SDE) or molecule numbers (Gillespie).
+# Denote your data as variable1, variable2, ..., variableN.
+# For simulation or synthetic data sets these data are ignored.
+# See fitting instruction below if the dimensionality of your data sets differ from the dimensionality of your model.
+
+<variables>
+<v1> 20.002 7.688 3.983 2.423 1.189 0.984 </v1>
+<v2> 20 11.7106 9.8755 8.95735 8.02924 5.08208 </v2>
+<v3> 20 9.36882 6.55783 4.90692 4.70811 4.12581 </v3>
+<v4> 80 24.8 21.3 16.8 10 5 </v4>
+<v5> 80 61.8 59 54.8 50.3 56 </v5>
+<v6> 54.4545 44.9846 36.3091 40.6811 34.1147 26.751 </v6>
+<v7> 51.8266 48.2462 44.6643 45.7958 49.2378 46.5273 </v7>
+<v8> 32.2462 12.428 7.60979 5.09091 2.78601 1.9021 </v8>
+</variables>
+</data>
+
+<models>
+
+<model1>
+<name> Fit </name>
+<source> model-ThreeProcess-step2-2k-hyper4.xml </source>
+
+# type: the method used to simulate your model. ODE, SDE or Gillespie.
+<type> Gillespie </type>
+
+# Fitting information. If fit is None, all species in the model are fitted to the data in the order they are listed in the model.
+# Otherwise, give a whitespace delimited list of fitting instrictions the same length as the dimensions of your data.
+# Use speciesN to denote the Nth species in your model. Simple arithmatic operations can be performed on the species from your model.
+# For example, to fit the sum of the first two species in your model to your first variable, write fit: species1+species2
+<fit> None </fit>
+
+# Priors:
+# one of 
+#	constant, value
+#	uniform, lower, upper
+#	gaussian, mean, variance
+
+<parameters>
+<parameter1> constant 1.0 </parameter1>
+<parameter2> latent 1 0 </parameter2>
+<parameter3> latent 1 0 </parameter3>
+<parameter4> latent 1 1 </parameter4>
+<parameter5> latent 1 1 </parameter5>
+<parameter6> latent 1 2 </parameter6>
+<parameter7> latent 1 2 </parameter7>
+<parameter8> constant 700 </parameter8>
+<parameter9> constant 700 </parameter9>
+<parameter10> constant 700 </parameter10>
+<parameter11> constant 2800 </parameter11>
+<parameter12> constant 2800 </parameter12>
+<parameter13> constant 1906.0 </parameter13>
+<parameter14> constant 1814 </parameter14>
+<parameter15> constant 1128.7 </parameter15>
+<parameter16> latent 1 2 </parameter16>
+<parameter17> latent 1 2 </parameter17>
+<parameter18> latent 1 2 </parameter18>
+<parameter19> latent 1 2 </parameter19>
+<parameter20> latent 1 2 </parameter20>
+<parameter21> latent 1 2 </parameter21>
+<parameter22> latent 1 2 </parameter22>
+<parameter23> latent 1 2 </parameter23>
+<parameter24> latent 1 2 </parameter24>
+<parameter25> latent 1 2 </parameter25>
+<parameter26> latent 1 3 </parameter26>
+<parameter27> latent 1 3 </parameter27>
+<parameter28> latent 1 1 </parameter28>
+
+<parameter29> latent 1 1 </parameter29>
+<parameter30> latent 1 3 </parameter30>
+<parameter31> latent 1 1 </parameter31>
+<parameter32> latent 1 1 </parameter32>
+<parameter33> latent 1 0 </parameter33>
+<parameter34> latent 1 0 </parameter34>
+<parameter35> latent 1 1 </parameter35>
+<parameter36> latent 1 1 </parameter36>
+<parameter37> latent 1 1 </parameter37>
+<parameter38> latent 1 1 </parameter38>
+<parameter39> latent 1 1 </parameter39>
+<parameter40> latent 1 1 </parameter40>
+<parameter41> latent 1 0 </parameter41>
+<parameter42> latent 1 0 </parameter42>
+<parameter43> latent 1 1 </parameter43>
+<parameter44> latent 1 1 </parameter44>
+<parameter45> hierarchical -4 4 0.5 1 </parameter45>
+<parameter46> hierarchical -4 4 0.5 1 </parameter46>
+<parameter47> hierarchical -4 4 0.5 1 </parameter47>
+<parameter48> hierarchical -4 4 0.5 1 </parameter48>
+<parameter49> hivar 0.05 0.9 </parameter49>
+
+
+</parameters>
+
+<initial>
+<ic1> constant 0.0 </ic1>
+<ic2> constant 0.0 </ic2>
+<ic3> constant 0.0  </ic3>
+<ic4> constant 700.0 </ic4>
+<ic5> constant 700.0 </ic5>
+<ic6> constant 700.0 </ic6>
+<ic7> constant 0.0 </ic7>
+<ic8> constant 0.0 </ic8>
+<ic9> constant 700.0 </ic9>
+<ic10> constant 700.0 </ic10>
+<ic11> constant 700.0 </ic11>
+<ic12> constant 0.0 </ic12>
+<ic13> constant 0.0 </ic13>
+<ic14> constant 700.0 </ic14>
+<ic15> constant 700.0 </ic15>
+<ic16> constant 2800 </ic16>
+<ic17> constant 0.0 </ic17>
+<ic18> constant 0.0 </ic18>
+<ic19> constant 2800 </ic19>
+<ic20> constant 2800 </ic20>
+<ic21> constant 2800 </ic21>
+<ic22> constant 0.0 </ic22>
+<ic23> constant 0.0 </ic23>
+<ic24> constant 2800 </ic24>
+<ic25> constant 2800 </ic25>
+<ic26> constant 1906 </ic26>
+<ic27> constant 0.0 </ic27>
+<ic28> constant 0.0 </ic28>
+<ic29> constant 1906 </ic29>
+<ic30> constant 1906 </ic30>
+<ic31> constant 1814 </ic31>
+<ic32> constant 0.0 </ic32>
+<ic33> constant 1814 </ic33>
+<ic34> constant 1128.7 </ic34>
+<ic35> constant 0.0 </ic35>
+<ic36> constant 0.0 </ic36>
+<ic37> constant 1128.7 </ic37>
+<ic38> constant 1128.7 </ic38>
+<ic39> constant 700.0 </ic39>
+<ic40> constant 700.0 </ic40>
+<ic41> constant 2800 </ic41>
+<ic42> constant 0.0 </ic42>
+<ic43> constant 700.0 </ic43>
+<ic44> constant 700.0 </ic44>
+<ic45> constant 0.0 </ic45>
+<ic46> constant 0.0 </ic46>
+
+</initial>
+</model1>
+
+
+</models>
+</input>
